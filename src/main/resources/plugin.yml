@@ -1,0 +1,30 @@
+name: DumbArenaPlugin
+version: '${project.version}'
+main: com.arrcival.dumbarenaplugin.DumbArenaPlugin
+api-version: 1.17
+authors: [ Arrcival ]
+description: on s'amuse comme des oufs
+website: https://github.com/arrcival
+commands:
+  newgame:
+    description: Starts a new game (needs op)
+    usage: /newgame [size]
+    permission: DumbArenaPlugin.opperm
+  destroygame:
+    description: Destroy the current game (needs op)
+    usage: /destroygame
+    permission: DumbArenaPlugin.opperm
+  joingame:
+    description: Join a currently pending game
+    usage: /joingame
+  exitgame:
+    description: Exit a currently pending game
+    usage: /exitgame
+  startgame:
+    description: Start a currently pending game (needs op)
+    usage: /startgame
+    permission: DumbArenaPlugin.opperm
+
+permissions:
+  DumbArenaPlugin.opperm:
+    default: op
