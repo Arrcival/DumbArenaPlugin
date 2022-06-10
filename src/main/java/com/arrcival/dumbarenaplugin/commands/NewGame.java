@@ -35,6 +35,16 @@ public class NewGame implements CommandExecutor {
                     try
                     {
                         int size = Integer.parseInt(firstArg); // what's tried
+                        if(player.getLocation().getBlockY() + size >= 320)
+                        {
+                            Msg.send(sender, "&rThe area is off limit !");
+                            return false;
+                        }
+                        if(size > 50)
+                        {
+                            Msg.send(sender, "&rThe area can't be bigger than 50x50x50.");
+                            return false;
+                        }
 
                         Msg.send(sender, "&aCreating arena at your location with a size of " + firstArg);
                         createGame(player.getLocation(), size);

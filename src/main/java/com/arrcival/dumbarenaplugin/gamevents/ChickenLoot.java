@@ -24,7 +24,7 @@ public class ChickenLoot extends GameEventArena{
         if(!chosenList.second)
             GivePlayersItem.ItemList.remove(i);
 
-        chickenAmount = Math.max((int)(Statics.CurrentGame.PlayerList.size() / 2), 1);
+        chickenAmount = Math.max((int)(Statics.CurrentGame.arenaSize / 3), 1);
         Statics.CurrentGame.SendMessageToAllAlivePlayers(ChatColor.GREEN + "In " + Consts.TIME_BETWEEN_ANNOUNCE_AND_EVENT + " seconds, " +
                 chickenAmount + " special chicken(s) will spawn !");
 

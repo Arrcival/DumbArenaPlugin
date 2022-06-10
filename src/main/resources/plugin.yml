@@ -1,7 +1,7 @@
 name: DumbArenaPlugin
 version: '${project.version}'
 main: com.arrcival.dumbarenaplugin.DumbArenaPlugin
-api-version: 1.17
+api-version: 1.18
 authors: [ Arrcival ]
 description: on s'amuse comme des oufs
 website: https://github.com/arrcival

@@ -1,19 +1,11 @@
 package com.arrcival.dumbarenaplugin.utils;
 
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.loot.LootContext;
-import org.bukkit.loot.LootTable;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
 
 public class WorldModification  {
 

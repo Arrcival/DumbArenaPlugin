@@ -33,8 +33,7 @@ public class Generate3DBlocks extends GameEventArena {
         MaterialPercentages.add(new Pairing<>(Material.WHITE_WOOL, 0.01f));
         MaterialPercentages.add(new Pairing<>(Material.SEA_LANTERN, 0.01f));
         MaterialPercentages.add(new Pairing<>(Material.SNOW_BLOCK, 0.015f));
-        MaterialPercentages.add(new Pairing<>(Material.SAND, 0.008f));
-        MaterialPercentages.add(new Pairing<>(Material.SAND, 0.008f));
+        MaterialPercentages.add(new Pairing<>(Material.SAND, 0.005f));
     }
 
     @Override

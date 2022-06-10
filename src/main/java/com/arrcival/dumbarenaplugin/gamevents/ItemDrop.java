@@ -16,8 +16,8 @@ public class ItemDrop extends GameEventArena {
     public ItemDrop()
     {
         ItemStack niceBow = new ItemStack(Material.BOW);
-        niceBow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
-        addItems(niceBow, new ItemStack(Material.ARROW, 16));
+        niceBow.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
+        addItems(niceBow, new ItemStack(Material.ARROW, 3));
 
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);

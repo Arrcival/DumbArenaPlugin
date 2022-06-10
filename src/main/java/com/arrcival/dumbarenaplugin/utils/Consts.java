@@ -13,6 +13,7 @@ public class Consts {
     public static final int TIME_DELAY_BEFORE_FIRST_EVENT = 5;
     public static final int TREE_SPAWNS = 2;
 
+    public static final int FIRST_LAVA_INCREASE = 30;
     public static final int TIME_BEFORE_LAVA_INCREASE = 10;
     public static final int ADDITIONAL_TIME_PER_PLAYERS = 2;
 

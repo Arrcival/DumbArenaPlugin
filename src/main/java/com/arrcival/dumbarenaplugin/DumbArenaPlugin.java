@@ -28,6 +28,7 @@ public final class DumbArenaPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerChat(), this);
         getServer().getPluginManager().registerEvents(new SpecificBlocksDestroyed(), this);
         getServer().getPluginManager().registerEvents(new ChickenKilled(), this);
+        getServer().getPluginManager().registerEvents(new PlayerRightClick(), this);
 
         Statics.AddEnabledEvents();
     }

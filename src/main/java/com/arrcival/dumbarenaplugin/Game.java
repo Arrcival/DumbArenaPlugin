@@ -77,11 +77,11 @@ public class Game {
         }.runTaskLater(DumbArenaPlugin.getInstance(), Consts.TIME_DELAY_BEFORE_FIRST_EVENT * Consts.TICKS_PER_SECOND);
 
         int delayLava = Consts.TIME_BEFORE_LAVA_INCREASE + PlayerList.size() * Consts.ADDITIONAL_TIME_PER_PLAYERS;
-        SendMessageToAllAlivePlayers(ChatColor.DARK_PURPLE + "Every " + delayLava + "s, the floor will be filled with lava !");
-        addLavaOverTime(delayLava);
+        SendMessageToAllAlivePlayers(ChatColor.DARK_PURPLE + "After " + Consts.FIRST_LAVA_INCREASE+ "s, every " + delayLava + "s, the floor will be filled with lava !");
+        addLavaOverTime(delayLava, Consts.FIRST_LAVA_INCREASE);
     }
 
-    void addLavaOverTime(int delay)
+    void addLavaOverTime(int delay, int delayFirstTime)
     {
         new BukkitRunnable(){
             @Override
@@ -90,11 +90,11 @@ public class Game {
                 FloorIsLava f = new FloorIsLava();
                 f.PrepareEvent();
                 if(Statics.IsGameRunning() && !WorldModification.IsFloorTooHigh())
-                    addLavaOverTime(delay);
+                    addLavaOverTime(delay, 0);
 
             }
         }.runTaskLater(DumbArenaPlugin.getInstance(),
-                Consts.TICKS_PER_SECOND * (delay));
+                Consts.TICKS_PER_SECOND * (delay + delayFirstTime));
     }
 
     void preparePlayers()

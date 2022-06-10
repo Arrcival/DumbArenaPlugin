@@ -29,14 +29,14 @@ public class PlayerDied implements Listener {
                 {
                     killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Consts.TIME_REGEN_ON_KILL * Consts.TICKS_PER_SECOND, 1));
                     Msg.send(killer, "You killed a player ! You got 5 seconds of regeneration 2.");
-                    if(killer.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
+                    if(killer.hasPotionEffect(PotionEffectType.HEALTH_BOOST))
                     {
-                        PotionEffect effect = killer.getPotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                        Msg.send(killer, ChatColor.DARK_PURPLE + "You now have Strength " + (effect.getAmplifier() + 2));
-                        killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Consts.TICKS_PER_SECOND * 60 * 30, effect.getAmplifier() + 1));
+                        PotionEffect effect = killer.getPotionEffect(PotionEffectType.HEALTH_BOOST);
+                        Msg.send(killer, ChatColor.DARK_PURPLE + "You now have Health Boost " + (effect.getAmplifier() + 2));
+                        killer.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Consts.TICKS_PER_SECOND * 60 * 30, effect.getAmplifier() + 1));
                     } else {
-                        Msg.send(killer, ChatColor.DARK_PURPLE + "You now have Strength 1");
-                        killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Consts.TICKS_PER_SECOND * 60 * 30, 0));
+                        Msg.send(killer, ChatColor.DARK_PURPLE + "You now have Health Boost 1");
+                        killer.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Consts.TICKS_PER_SECOND * 60 * 30, 0));
                     }
                 }
 
