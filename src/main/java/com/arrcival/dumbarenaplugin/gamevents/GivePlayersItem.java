@@ -2,6 +2,7 @@ package com.arrcival.dumbarenaplugin.gamevents;
 
 import com.arrcival.dumbarenaplugin.utils.*;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -41,13 +42,13 @@ public class GivePlayersItem extends GameEventArena {
                 new ItemStack(Material.FLINT_AND_STEEL))
         );
 
-        ItemCreator harmPot = new ItemCreator(Statics.CreateSplashPotion(PotionEffectType.HARM, 1, 1));
+        ItemCreator harmPot = new ItemCreator(Statics.CreateSplashPotion(PotionEffectType.HARM, Color.RED,1, 1));
         harmPot.setName(ChatColor.DARK_RED + "Harm potion");
         ItemList.add(toPair(true, harmPot.getItemStack()));
-        ItemCreator healPot = new ItemCreator(Statics.CreateSplashPotion(PotionEffectType.HEAL, 1, 1));
+        ItemCreator healPot = new ItemCreator(Statics.CreateSplashPotion(PotionEffectType.HEAL, Color.FUCHSIA,1, 1));
         healPot.setName(ChatColor.GREEN + "Heal potion");
         ItemList.add(toPair(true, healPot.getItemStack()));
-        ItemCreator weakPot = new ItemCreator(Statics.CreateSplashPotion(PotionEffectType.WEAKNESS, 30, 0));
+        ItemCreator weakPot = new ItemCreator(Statics.CreateSplashPotion(PotionEffectType.WEAKNESS, Color.GRAY, 30 * Consts.TICKS_PER_SECOND, 0));
         weakPot.setName(ChatColor.GREEN + "Weakness potion");
         ItemList.add(toPair(true, weakPot.getItemStack()));
     }

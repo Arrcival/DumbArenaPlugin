@@ -3,10 +3,7 @@ package com.arrcival.dumbarenaplugin.utils;
 import com.arrcival.dumbarenaplugin.DumbArenaPlugin;
 import com.arrcival.dumbarenaplugin.Game;
 import com.arrcival.dumbarenaplugin.gamevents.*;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -106,11 +103,12 @@ public class Statics {
         return str.replace("_", " ").toLowerCase();
     }
 
-    public static ItemStack CreateSplashPotion(PotionEffectType type, int duration, int rank)
+    public static ItemStack CreateSplashPotion(PotionEffectType type, Color color, int duration, int rank)
     {
         ItemStack splash = new ItemStack(Material.SPLASH_POTION);
         PotionMeta pMeta = (PotionMeta)splash.getItemMeta();
         pMeta.addCustomEffect(new PotionEffect(type, duration, rank), true);
+        pMeta.setColor(color);
         splash.setItemMeta(pMeta);
         return splash;
     }

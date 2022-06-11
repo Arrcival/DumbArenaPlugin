@@ -294,7 +294,7 @@ public class WorldModification  {
         Location spawn = new Location(
                 endLocation.getWorld(),
                 (int)(endLocation.getBlockX() - getArenaMiddle() - 1),
-                (int)(endLocation.getBlockY() - getArenaMiddle() + floor / 2),
+                (int)(endLocation.getBlockY() - getArenaMiddle() + floor / 2 - 1),
                 (int)(endLocation.getBlockZ() - getArenaMiddle() - 1)
         );
         SpawnBlock(spawn, mat, true);
