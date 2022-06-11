@@ -57,7 +57,7 @@ public class Game {
 
         BatchBlockModification blockQueue = WorldModification.GenerateMap(gameLocation, oppositeCornerLocation);
         blockQueue.AddEndMethods(this, this.getClass().getMethod("AfterMapIsCreated"));
-        blockQueue.Run();
+        blockQueue.Run(true);
     }
 
     public void AfterMapIsCreated() throws InvocationTargetException, IllegalAccessException {
@@ -249,7 +249,7 @@ public class Game {
         if(DeathList.size() > 0)
             DeathList.get(0).getWorld().setGameRule(GameRule.NATURAL_REGENERATION, true);
         BatchBlockModification batch = WorldModification.GenerateDeletionMap(gameLocation, oppositeCornerLocation);
-        batch.Run();
+        batch.Run(true);
     }
 
     void EnablePvP()

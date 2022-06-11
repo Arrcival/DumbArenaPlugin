@@ -4,6 +4,7 @@ import org.bukkit.*;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
@@ -148,13 +149,12 @@ public class WorldModification  {
                     Location loc = new Location(startingLocation.getWorld(), x, y, z);
                     if(loc.getBlock().getType() == from)
                     {
-
                         blockModification.AddToQueue(loc, to);
                     }
                 }
             }
         }
-        blockModification.Run();
+        blockModification.Run(true);
     }
     public static void ChangeMapWith(Material mat, Float percentage) throws InvocationTargetException, IllegalAccessException {
         BatchBlockModification blockModification = new BatchBlockModification();
@@ -172,7 +172,7 @@ public class WorldModification  {
                 }
             }
         }
-        blockModification.Run();
+        blockModification.Run(false);
     }
 
     public static void FillFloor(Material mat)
@@ -297,7 +297,7 @@ public class WorldModification  {
                 (int)(endLocation.getBlockY() - getArenaMiddle() + floor / 2),
                 (int)(endLocation.getBlockZ() - getArenaMiddle() - 1)
         );
-        spawn.getBlock().setType(mat);
+        SpawnBlock(spawn, mat, true);
     }
 
     public static boolean IsFloorTooHigh()
@@ -311,6 +311,22 @@ public class WorldModification  {
     {
         if(!AppearedBlocks.contains(mat))
             AppearedBlocks.add(mat);
+    }
+
+    public static void SpawnBlock(Location loc, Material mat, boolean canSpawnOnPlayer)
+    {
+        if(canSpawnOnPlayer)
+            loc.getBlock().setType(mat);
+        else
+        {
+            for(Player player : Statics.CurrentGame.PlayerList)
+            {
+                Location playerLoc = player.getLocation();
+                if(playerLoc.getBlockX() == loc.getBlockX() && playerLoc.getBlockY() == loc.getBlockY() && playerLoc.getBlockZ() == loc.getBlockZ())
+                    return;
+                loc.getBlock().setType(mat);
+            }
+        }
     }
 
 }

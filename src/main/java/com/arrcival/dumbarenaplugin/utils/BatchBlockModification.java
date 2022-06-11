@@ -31,18 +31,18 @@ public class BatchBlockModification {
         methods.add(new Pairing<>(object, method));
     }
 
-    public void Run() throws InvocationTargetException, IllegalAccessException {
+    public void Run(boolean canSpawnOnPlayer) throws InvocationTargetException, IllegalAccessException {
         if(blockQueue.size() > 0) {
             new BukkitRunnable() {
                 public void run()
                 {
                     for(int i = 0; i < Math.min(blockQueue.size(), Consts.BLOCKS_PER_TICK); i++) {
                         Pairing<Location, Material> pair = blockQueue.get(0);
-                        pair.first.getBlock().setType(pair.second);
+                        WorldModification.SpawnBlock(pair.first, pair.second, canSpawnOnPlayer);
                         blockQueue.remove(0);
                     }
                     try {
-                        Run();
+                        Run(canSpawnOnPlayer);
                     } catch (InvocationTargetException e) {
                         e.printStackTrace();
                     } catch (IllegalAccessException e) {
