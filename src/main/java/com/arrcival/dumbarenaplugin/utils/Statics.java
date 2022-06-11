@@ -52,8 +52,6 @@ public class Statics {
         EnabledEvents.clear();
         EnabledEvents.add(new Generate3DBlocks());
         EnabledEvents.add(new GivePlayersItem());
-        //EnabledEvents.add(new FloorIsLava());
-        //EnabledEvents.add(new ArenaGetsSmaller());
         EnabledEvents.add(new TypeToGet());
         EnabledEvents.add(new GenerateTrees());
         EnabledEvents.add(new RandomEffect());
@@ -61,6 +59,12 @@ public class Statics {
         EnabledEvents.add(new BlockSpawn());
         EnabledEvents.add(new ChickenLoot());
         EnabledEvents.add(new OneBlockGetsRemoved());
+        EnabledEvents.add(new EnchantUp());
+
+
+        // outdated
+        //EnabledEvents.add(new FloorIsLava());
+        //EnabledEvents.add(new ArenaGetsSmaller());
     }
 
     public static GameEventArena PickRandomEvent()

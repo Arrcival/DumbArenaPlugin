@@ -61,7 +61,7 @@ public class Game {
     }
 
     public void AfterMapIsCreated() throws InvocationTargetException, IllegalAccessException {
-        WorldModification.ChangeMapWith(Material.DIRT, 0.02f);
+        WorldModification.ChangeMapWith(Material.DIRT, 0.03f);
         WorldModification.ChangeMapWith(Material.IRON_ORE, 0.003f);
         State = GameState.IN_GAME;
         PvP = false;

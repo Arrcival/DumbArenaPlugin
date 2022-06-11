@@ -118,6 +118,23 @@ public class WorldModification  {
     public static BatchBlockModification GenerateDeletionMap(Location startingLocation, Location endLocation)
     {
         BatchBlockModification blockQueue = new BatchBlockModification();
+        for(int y = endLocation.getBlockY(); y >= startingLocation.getBlockY() - 1; y--)
+        {
+            for(int x = startingLocation.getBlockX() - 1; x < endLocation.getBlockX() + 1; x++)
+            {
+                for(int z = startingLocation.getBlockZ() - 1; z < endLocation.getBlockZ() + 1; z++)
+                {
+                    if(OldArena.size() >= 0)
+                    {
+                        blockQueue.AddToQueue(new Location(startingLocation.getWorld(), x, y, z), OldArena.get(0));
+                        OldArena.remove(0);
+                    } else
+                        blockQueue.AddToQueue(new Location(startingLocation.getWorld(), x, y, z), Material.AIR);
+
+                }
+            }
+        }
+        /*
         for(int x = startingLocation.getBlockX() - 1; x < endLocation.getBlockX() + 1; x++)
         {
             for(int y = startingLocation.getBlockY() - 1; y < endLocation.getBlockY() + 1; y++)
@@ -133,7 +150,7 @@ public class WorldModification  {
 
                 }
             }
-        }
+        }*/
         ArenaBorders.clear();
         return blockQueue;
     }

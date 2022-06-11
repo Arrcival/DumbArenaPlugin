@@ -23,8 +23,10 @@ public class Generate3DBlocks extends GameEventArena {
     {
         MaterialPercentages.add(new Pairing<>(Material.DIRT, 0.03f));
         MaterialPercentages.add(new Pairing<>(Material.IRON_ORE, 0.006f));
+        MaterialPercentages.add(new Pairing<>(Material.DEEPSLATE_IRON_ORE, 0.01f));
         MaterialPercentages.add(new Pairing<>(Material.GOLD_ORE, 0.006f));
         MaterialPercentages.add(new Pairing<>(Material.DIAMOND_ORE, 0.003f));
+        MaterialPercentages.add(new Pairing<>(Material.DEEPSLATE_DIAMOND_ORE, 0.005f));
         MaterialPercentages.add(new Pairing<>(Material.IRON_BLOCK, 0.001f));
         MaterialPercentages.add(new Pairing<>(Material.CRAFTING_TABLE, 0.003f));
         MaterialPercentages.add(new Pairing<>(Material.PACKED_ICE, 0.003f));
