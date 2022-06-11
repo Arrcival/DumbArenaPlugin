@@ -15,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,8 +60,9 @@ public class Game {
         blockQueue.Run();
     }
 
-    public void AfterMapIsCreated()
-    {
+    public void AfterMapIsCreated() throws InvocationTargetException, IllegalAccessException {
+        WorldModification.ChangeMapWith(Material.DIRT, 0.02f);
+        WorldModification.ChangeMapWith(Material.IRON_ORE, 0.003f);
         State = GameState.IN_GAME;
         PvP = false;
         SendMessageToAllAlivePlayers("The game is starting !");
@@ -269,6 +271,7 @@ public class Game {
         GameMode gameMode;
         Location location;
         int level;
+        Collection<PotionEffect> potionEffects;
 
         public InfosOnStart(Player player)
         {
@@ -278,6 +281,7 @@ public class Game {
             location = player.getLocation();
             armorInventory = player.getInventory().getArmorContents();
             level = player.getLevel();
+            potionEffects = player.getActivePotionEffects();
         }
 
         public void RestorePlayer()
@@ -288,6 +292,10 @@ public class Game {
             p.setGameMode(gameMode);
             p.teleport(location);
             p.setLevel(level);
+            for (PotionEffect effect : p.getActivePotionEffects())
+                p.removePotionEffect(effect.getType());
+            for(PotionEffect effect : potionEffects)
+                p.addPotionEffect(effect);
         }
     }
 }
