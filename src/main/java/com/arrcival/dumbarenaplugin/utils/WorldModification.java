@@ -6,6 +6,7 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class WorldModification  {
@@ -136,8 +137,8 @@ public class WorldModification  {
         return blockQueue;
     }
 
-    public static void ReplaceWith(Material from, Material to)
-    {
+    public static void ReplaceWith(Material from, Material to) throws InvocationTargetException, IllegalAccessException {
+        BatchBlockModification blockModification = new BatchBlockModification();
         for(int x = startingLocation.getBlockX() + xNegative; x < endLocation.getBlockX() - xPositive; x++)
         {
             for(int y = startingLocation.getBlockY() + floor; y < endLocation.getBlockY() - ceiling; y++)
@@ -146,14 +147,17 @@ public class WorldModification  {
                 {
                     Location loc = new Location(startingLocation.getWorld(), x, y, z);
                     if(loc.getBlock().getType() == from)
-                        loc.getBlock().setType(to);
+                    {
 
+                        blockModification.AddToQueue(loc, to);
+                    }
                 }
             }
         }
+        blockModification.Run();
     }
-    public static void ChangeMapWith(Material mat, Float percentage)
-    {
+    public static void ChangeMapWith(Material mat, Float percentage) throws InvocationTargetException, IllegalAccessException {
+        BatchBlockModification blockModification = new BatchBlockModification();
         for(int x = startingLocation.getBlockX() + xNegative; x < endLocation.getBlockX() - xPositive; x++)
         {
             for(int y = startingLocation.getBlockY() + floor; y < endLocation.getBlockY() - ceiling; y++)
@@ -162,11 +166,13 @@ public class WorldModification  {
                 {
                     double rng = Math.random();
                     if(rng <= percentage)
-                        new Location(startingLocation.getWorld(), x, y, z).getBlock().setType(mat);
-
+                    {
+                        blockModification.AddToQueue(new Location(startingLocation.getWorld(), x, y, z), mat);
+                    }
                 }
             }
         }
+        blockModification.Run();
     }
 
     public static void FillFloor(Material mat)

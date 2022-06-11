@@ -6,10 +6,12 @@ import com.arrcival.dumbarenaplugin.utils.Consts;
 import com.arrcival.dumbarenaplugin.utils.Statics;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.lang.reflect.InvocationTargetException;
+
 public abstract class GameEventArena {
 
     public abstract void PrepareEvent();
-    public abstract void RunEvent();
+    public abstract void RunEvent() throws InvocationTargetException, IllegalAccessException;
 
     public void RunEventLater()
     {
@@ -22,8 +24,15 @@ public abstract class GameEventArena {
         {
             public void run()
             {
-                if(Statics.IsGameRunning())
-                    RunEvent();
+                if(Statics.IsGameRunning()) {
+                    try {
+                        RunEvent();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }.runTaskLater(DumbArenaPlugin.getInstance(), (Consts.TIME_BETWEEN_ANNOUNCE_AND_EVENT + extraSecs) * Consts.TICKS_PER_SECOND);
     }

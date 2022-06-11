@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,7 +56,7 @@ public class Generate3DBlocks extends GameEventArena {
     }
 
     @Override
-    public void RunEvent() {
+    public void RunEvent() throws InvocationTargetException, IllegalAccessException {
         WorldModification.ChangeMapWith(chosenMaterial.first, chosenMaterial.second);
         Statics.CurrentGame.SendMessageToAllAlivePlayers(ChatColor.GREEN + "Area filled with " + Statics.GetPrettyName(chosenMaterial.first));
         WorldModification.AddAppeared(chosenMaterial.first);

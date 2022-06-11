@@ -6,6 +6,8 @@ import com.arrcival.dumbarenaplugin.utils.WorldModification;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class OneBlockGetsRemoved extends GameEventArena{
 
     Material chosenMaterial;
@@ -27,7 +29,7 @@ public class OneBlockGetsRemoved extends GameEventArena{
     }
 
     @Override
-    public void RunEvent() {
+    public void RunEvent() throws InvocationTargetException, IllegalAccessException {
         WorldModification.ReplaceWith(chosenMaterial, Material.AIR);
     }
 }

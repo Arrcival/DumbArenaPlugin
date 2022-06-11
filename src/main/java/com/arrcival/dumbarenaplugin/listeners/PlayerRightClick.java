@@ -65,7 +65,7 @@ public class PlayerRightClick implements Listener {
                 ItemStack item = new ItemStack(Material.IRON_HELMET);
                 inv.setHelmet(item);
                 inv.getItemInMainHand().setAmount(ingots - 5);
-                Msg.send(player, ChatColor.GRAY + "Iron helmt automatically created and equipped.");
+                Msg.send(player, ChatColor.GRAY + "Iron helmet automatically created and equipped.");
                 return;
             }
             if(inv.getBoots() == null && ingots >= 4)
