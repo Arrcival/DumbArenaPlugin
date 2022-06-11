@@ -21,5 +21,7 @@ public class Consts {
 
     public static final int CEILING_PROTECTION = 4;
 
+    public static final int BLOCKS_PER_TICK = 100;
+
 
 }

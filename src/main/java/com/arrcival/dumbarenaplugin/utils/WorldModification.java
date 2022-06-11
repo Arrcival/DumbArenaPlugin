@@ -1,6 +1,7 @@
 package com.arrcival.dumbarenaplugin.utils;
 
 import org.bukkit.*;
+import org.bukkit.entity.Bat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -52,10 +53,43 @@ public class WorldModification  {
                         ArenaBorders.add(loc);
                     } else
                         new Location(startingLocation.getWorld(), x, y, z).getBlock().setType(Material.AIR);
-
                 }
             }
         }
+    }
+
+    public static BatchBlockModification GenerateMap(Location start, Location end)
+    {
+        floor = 0; ceiling = 0; zPositive = 0; zNegative = 0; xPositive = 0; xNegative = 0;
+        startingLocation = start;
+        endLocation = end;
+        AppearedBlocks.clear();
+        BatchBlockModification blockQueue = new BatchBlockModification();
+
+        for(int x = startingLocation.getBlockX() - 1; x < endLocation.getBlockX() + 1; x++)
+        {
+            for(int y = startingLocation.getBlockY() - 1; y < endLocation.getBlockY() + 1; y++)
+            {
+                for(int z = startingLocation.getBlockZ() - 1; z < endLocation.getBlockZ() + 1; z++)
+                {
+                    OldArena.add((new Location(startingLocation.getWorld(), x, y, z).getBlock().getType()));
+
+                    if(     x == startingLocation.getBlockX() - 1 || x == endLocation.getBlockX() ||
+                            y == startingLocation.getBlockY() - 1 || y == endLocation.getBlockY() ||
+                            z == startingLocation.getBlockZ() - 1 || z == endLocation.getBlockZ())
+                    {
+                        Location loc = new Location(startingLocation.getWorld(), x, y, z);
+                        blockQueue.AddToQueue(loc, Material.WHITE_STAINED_GLASS);
+                        ArenaBorders.add(loc);
+                    } else
+                    {
+                        Location loc = new Location(startingLocation.getWorld(), x, y, z);
+                        blockQueue.AddToQueue(loc, Material.AIR);
+                    }
+                }
+            }
+        }
+        return blockQueue;
     }
 
     public static void DeleteMap(Location startingLocation, Location endLocation)
@@ -77,6 +111,29 @@ public class WorldModification  {
             }
         }
         ArenaBorders.clear();
+    }
+
+    public static BatchBlockModification GenerateDeletionMap(Location startingLocation, Location endLocation)
+    {
+        BatchBlockModification blockQueue = new BatchBlockModification();
+        for(int x = startingLocation.getBlockX() - 1; x < endLocation.getBlockX() + 1; x++)
+        {
+            for(int y = startingLocation.getBlockY() - 1; y < endLocation.getBlockY() + 1; y++)
+            {
+                for(int z = startingLocation.getBlockZ() - 1; z < endLocation.getBlockZ() + 1; z++)
+                {
+                    if(OldArena.size() >= 0)
+                    {
+                        blockQueue.AddToQueue(new Location(startingLocation.getWorld(), x, y, z), OldArena.get(0));
+                        OldArena.remove(0);
+                    } else
+                        blockQueue.AddToQueue(new Location(startingLocation.getWorld(), x, y, z), Material.AIR);
+
+                }
+            }
+        }
+        ArenaBorders.clear();
+        return blockQueue;
     }
 
     public static void ReplaceWith(Material from, Material to)

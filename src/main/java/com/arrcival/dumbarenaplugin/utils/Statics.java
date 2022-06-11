@@ -73,7 +73,6 @@ public class Statics {
         {
             EnabledEvents.remove(event);
             PickRandomEvent();
-
         }
         if(event instanceof OneBlockGetsRemoved && Statics.IsGameRunning() && WorldModification.AppearedBlocks.size() == 0)
         {
@@ -82,7 +81,6 @@ public class Statics {
         }
         return event;
     }
-
 
     public static boolean IsGameRunning()
     {
@@ -99,7 +97,6 @@ public class Statics {
     {
         return item.getType().name().replace("_", " ").toLowerCase();
     }
-
     public static String GetPrettyName(Material mat)
     {
         return mat.name().replace("_", " ").toLowerCase();

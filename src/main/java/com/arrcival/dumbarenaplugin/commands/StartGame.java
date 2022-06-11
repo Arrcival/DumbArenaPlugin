@@ -7,6 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class StartGame implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -14,7 +16,15 @@ public class StartGame implements CommandExecutor {
         if(Statics.CurrentGame != null && Statics.CurrentGame.State == Game.GameState.WAITING)
         {
             Statics.AddEnabledEvents();
-            Statics.CurrentGame.StartGame();
+            try {
+                Statics.CurrentGame.StartGame();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }

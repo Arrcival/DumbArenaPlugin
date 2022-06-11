@@ -12,11 +12,12 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class PlayerDied implements Listener {
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event)
-    {
+    public void onPlayerDeath(PlayerDeathEvent event) throws InvocationTargetException, IllegalAccessException {
         if(Statics.CurrentGame != null && Statics.CurrentGame.State == Game.GameState.IN_GAME)
         {
             Player playerKilled = event.getEntity().getPlayer();

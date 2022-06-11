@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,21 +47,24 @@ public class Game {
 
     }
 
-    public void StartGame()
-    {
+    public void StartGame() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //if(PlayerList.size() < 2) return;
         oppositeCornerLocation = gameLocation.clone();
         oppositeCornerLocation.setX(oppositeCornerLocation.getBlockX() + arenaSize);
         oppositeCornerLocation.setY(oppositeCornerLocation.getBlockY() + arenaSize);
         oppositeCornerLocation.setZ(oppositeCornerLocation.getBlockZ() + arenaSize);
 
-        WorldModification.CreateMap(gameLocation, oppositeCornerLocation);
+        BatchBlockModification blockQueue = WorldModification.GenerateMap(gameLocation, oppositeCornerLocation);
+        blockQueue.AddEndMethods(this, this.getClass().getMethod("AfterMapIsCreated"));
+        blockQueue.Run();
+    }
+
+    public void AfterMapIsCreated()
+    {
         State = GameState.IN_GAME;
         PvP = false;
         SendMessageToAllAlivePlayers("The game is starting !");
         preparePlayers();
-        WorldModification.AppearedBlocks.add(Material.DIRT);
-        WorldModification.AppearedBlocks.add(Material.OAK_PLANKS);
         SendMessageToAllAlivePlayers("There is " + Integer.toString(PlayerList.size()) + " players participating");
         SendMessageToAllAlivePlayers("Last man alive, wins. GL & HF !");
 
@@ -180,8 +184,7 @@ public class Game {
 
     }
 
-    public void Destroy()
-    {
+    public void Destroy() throws InvocationTargetException, IllegalAccessException {
         if(State == GameState.IN_GAME)
         {
             gameEnd();
@@ -201,8 +204,7 @@ public class Game {
         return -1;
     }
 
-    public void PlayerDied(int i)
-    {
+    public void PlayerDied(int i) throws InvocationTargetException, IllegalAccessException {
         Player p = PlayerList.get(i);
         PlayerList.remove(i);
         DeathList.add(p);
@@ -220,8 +222,7 @@ public class Game {
         }
     }
 
-    void gameOverCheck()
-    {
+    void gameOverCheck() throws InvocationTargetException, IllegalAccessException {
         if(PlayerList.size() <= 1)
         {
             SendMessageToAllPlayers(PlayerList, ChatColor.GOLD + "You won the game !!!");
@@ -237,8 +238,7 @@ public class Game {
         }
     }
 
-    void gameEnd()
-    {
+    void gameEnd() throws InvocationTargetException, IllegalAccessException {
         PlayerList.forEach(player -> player.getActivePotionEffects().forEach(e -> player.removePotionEffect(e.getType())));
         PlayerList.forEach(player -> player.setGameMode(GameMode.SURVIVAL));
         DeathList.forEach(player -> player.setGameMode(GameMode.SURVIVAL));
@@ -246,7 +246,8 @@ public class Game {
 
         if(DeathList.size() > 0)
             DeathList.get(0).getWorld().setGameRule(GameRule.NATURAL_REGENERATION, true);
-        WorldModification.DeleteMap(gameLocation, oppositeCornerLocation);
+        BatchBlockModification batch = WorldModification.GenerateDeletionMap(gameLocation, oppositeCornerLocation);
+        batch.Run();
     }
 
     void EnablePvP()
