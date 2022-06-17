@@ -10,7 +10,10 @@ Every 10 (+2 per player) seconds, a lava floor is created or gets higher, so you
 
 Controlling the center is good as some events gives stuff at the middle of the arena.
 
-*Not tested : Each kills should be rewarding a Strength buff to the killer (cumulable)*
+The arena starts filled with random block of dirt and iron ore. There's a cutclean effect (ingots drops from ores).
+Shift+right clicking a crafting table with iron ingots or diamonds will craft armor (from the biggest one to smallest) and auto-equip it.
+
+*Not tested : Each kills should be rewarding a Health boost buff to the killer (cumulable)*
 
 ---
 
@@ -77,3 +80,5 @@ The chosen loot is picked randomly in the GivePlayersItem's item list.
 
 
 `OneBlockGetsRemoved` removes every block in the arena of the specified type.
+
+`EnchantUp` improves (or add) the enchantements on the item you're currently holding in your main hand.
